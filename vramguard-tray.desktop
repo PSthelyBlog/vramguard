@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=vramguard status icon
+Comment=Shows whether vramguard is protecting the GPU
+Exec=/usr/local/bin/vramguard-tray
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

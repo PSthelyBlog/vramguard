@@ -1,0 +1,17 @@
+[Unit]
+Description=Hold defective video memory so nothing else uses it
+# Claim the bad memory before the desktop starts allocating video memory.
+Before=display-manager.service
+After=systemd-modules-load.service nvidia-persistenced.service
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/vramguard hold
+# The test takes about 15 s; never hold up the boot for long if it hangs.
+TimeoutStartSec=120
+# Once it stops, other programs may take the released memory, so restarting
+# would no longer reach all of it. Reboot instead.
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
